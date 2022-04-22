@@ -11,22 +11,22 @@ import java.util.List;
 public class AvaliacaoService {
 
     @Autowired
-    private AvaliacaoRepository avaliacaoRepository;
+    private AvaliacaoRepository repository;
 
     public List<Avaliacao> getAvaliacoes(){
-        return this.avaliacaoRepository.findAll();
+        return this.repository.findAll();
     }
 
-    public Avaliacao getAvaliacaoId(Integer idAvaliacao){
-        return this.avaliacaoRepository.findById(idAvaliacao).orElse(null);
+    public Avaliacao getAvaliacaoById(Integer id){
+        return this.repository.findById(id).orElse(null);
     }
 
     public Avaliacao inserirAvaliacao(Avaliacao avaliacao){
-        return this.avaliacaoRepository.save(avaliacao);
+        return this.repository.save(avaliacao);
     }
 
-    public void apagarAvaliacao(Integer idAvaliacao){
-        this.avaliacaoRepository.deleteById(idAvaliacao);
+    public void apagarAvaliacao(Integer id){
+        this.repository.deleteById(id);
     }
 
 }

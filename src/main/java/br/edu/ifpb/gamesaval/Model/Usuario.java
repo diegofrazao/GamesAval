@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name="tb_usuarios")
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,14 +18,12 @@ public class Usuario {
     private List<Avaliacao> avaliacoes = new ArrayList<>();
 
     public Usuario() {
-
     }
 
-    public Usuario(String nome, String login, String senha, List<Avaliacao> avaliacoes) {
+    public Usuario(String nome, String login, String senha) {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-        this.avaliacoes = avaliacoes;
     }
 
     public Long getId() {
@@ -59,7 +58,8 @@ public class Usuario {
         return avaliacoes;
     }
 
-    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-        this.avaliacoes = avaliacoes;
+    public void setAvaliacoes(Avaliacao avaliacao) {
+        avaliacao.setUsuario(this);
+        this.avaliacoes.add(avaliacao);
     }
 }

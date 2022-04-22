@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "tb_avaliacoes")
 public class Avaliacao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,10 +20,9 @@ public class Avaliacao {
     public Avaliacao() {
     }
 
-    public Avaliacao(String descricao, Usuario usuario, List<Jogo> avaliacoesJogos) {
+    public Avaliacao(String descricao, Usuario usuario) {
         this.descricao = descricao;
         this.usuario = usuario;
-        this.avaliacoesJogos = avaliacoesJogos;
     }
 
     public Long getId() {
@@ -49,7 +49,8 @@ public class Avaliacao {
         return avaliacoesJogos;
     }
 
-    public void setAvaliacoesJogos(List<Jogo> avaliacoesJogos) {
-        this.avaliacoesJogos = avaliacoesJogos;
+    public void setAvaliacoesJogos(Jogo avaliacoesJogos) {
+        avaliacoesJogos.setAvaliacoesJogos(this);
+        this.avaliacoesJogos.add(avaliacoesJogos);
     }
 }

@@ -9,25 +9,22 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepository repository;
 
-
-    public Usuario UsuarioId(Integer id) {
-        return this.usuarioRepository.findById(id).orElse(null);
+    public Usuario getUsuarioById(Integer id) {
+        return this.repository.findById(id).orElse(null);
     }
 
     public Usuario inserirOuAtualizar(Usuario usuario) {
-        return this.usuarioRepository.save(usuario);
+        return this.repository.save(usuario);
     }
-
 
     public void apagarUsuario(Integer id) {
-        this.usuarioRepository.deleteById(id);
+        this.repository.deleteById(id);
     }
 
-
     public Boolean verificaUsuarioLogado(String login, String senha) {
-        return this.usuarioRepository.existsByLoginAndSenha(login, senha);
+        return this.repository.existsByLoginAndSenha(login, senha);
     }
 
 }
