@@ -1,8 +1,8 @@
 package br.edu.ifpb.gamesaval.Model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_jogos")
@@ -13,8 +13,8 @@ public class Jogo {
     private Long id;
     private String nome;
     private String descricao;
-    @ManyToMany(mappedBy = "avaliacoesJogos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Avaliacao> avaliacoesJogos = new ArrayList<>();
+    @ManyToMany(mappedBy = "jogos")
+    private List<Avaliacao> avaliacoes;
 
     public Jogo() {
     }
@@ -44,13 +44,13 @@ public class Jogo {
         this.descricao = descricao;
     }
 
-    public List<Avaliacao> getAvaliacoesJogos() {
-        return avaliacoesJogos;
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
     }
 
-    public void setAvaliacoesJogos(Avaliacao avaliacoesJogos) {
-        avaliacoesJogos.setAvaliacoesJogos(this);
-        this.avaliacoesJogos.add(avaliacoesJogos);
+    public void setAvaliacoes(Avaliacao avaliacoesJogos) {
+        avaliacoesJogos.setJogos(this);
+        this.avaliacoes.add(avaliacoesJogos);
     }
 }
 

@@ -5,11 +5,17 @@ import br.edu.ifpb.gamesaval.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
     @Autowired
     private UsuarioRepository repository;
+
+    public List<Usuario> getUsuarios() {
+        return repository.findAll();
+    }
 
     public Usuario getUsuarioById(Integer id) {
         return this.repository.findById(id).orElse(null);

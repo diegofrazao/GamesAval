@@ -3,6 +3,7 @@ package br.edu.ifpb.gamesaval.Model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_avaliacoes")
@@ -14,8 +15,8 @@ public class Avaliacao {
     private String descricao;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Usuario usuario;
-    @ManyToMany(mappedBy = "avaliacoesJogos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Jogo> avaliacoesJogos = new ArrayList<>();
+    @ManyToMany
+    private List<Jogo> jogos;
 
     public Avaliacao() {
     }
@@ -45,12 +46,12 @@ public class Avaliacao {
         this.usuario = usuario;
     }
 
-    public List<Jogo> getAvaliacoesJogos() {
-        return avaliacoesJogos;
+    public List<Jogo> getJogos() {
+        return jogos;
     }
 
-    public void setAvaliacoesJogos(Jogo avaliacoesJogos) {
-        avaliacoesJogos.setAvaliacoesJogos(this);
-        this.avaliacoesJogos.add(avaliacoesJogos);
+    public void setJogos(Jogo avaliacoesJogos) {
+        avaliacoesJogos.setAvaliacoes(this);
+        this.jogos.add(avaliacoesJogos);
     }
 }
