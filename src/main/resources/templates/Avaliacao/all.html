@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaliacoes</title>
+</head>
+<body>
+
+    <h1>Avaliações</h1>
+
+    <ul th:each="avaliacao : ${avaliacoes}" >
+        <li th:text="'Avaliação: '+${avaliacao.descricao}"></li>
+    </ul>
+    <div><br>
+        <a th:href="@{/avaliacao/add}">Add</a>
+    </div>
+</body>
+</html>

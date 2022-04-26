@@ -62,4 +62,15 @@ public class Usuario {
         avaliacao.setUsuario(this);
         this.avaliacoes.add(avaliacao);
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                ", avaliacoes=" + avaliacoes +
+                '}';
+    }
 }

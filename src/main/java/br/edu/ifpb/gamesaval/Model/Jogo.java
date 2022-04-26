@@ -52,5 +52,15 @@ public class Jogo {
         avaliacoesJogos.setJogos(this);
         this.avaliacoes.add(avaliacoesJogos);
     }
+
+    @Override
+    public String toString() {
+        return "Jogo{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", avaliacoes=" + avaliacoes +
+                '}';
+    }
 }
 

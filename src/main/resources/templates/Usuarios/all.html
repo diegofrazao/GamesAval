@@ -21,5 +21,11 @@
         </tr>
     </table>
 
+    <ul th:each="usuario : ${usuarios}">
+        <li th:text="'Nome: '+${usuario.nome}"></li>
+        <li th:text="'Login: '+${usuario.login}"></li>
+        <li th:text="'Senha: '+${usuario.senha}"></li>
+    </ul>
+
 </body>
 </html>
