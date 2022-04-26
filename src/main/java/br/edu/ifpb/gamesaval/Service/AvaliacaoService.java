@@ -19,11 +19,6 @@ public class AvaliacaoService {
     @Autowired
     private AvaliacaoRepository repository;
 
-//    TODO
-//    RABBIT CONSUMER
-//    channel.basicConsume
-
-
     public List<Avaliacao> getAvaliacoes(){
         return this.repository.findAll();
     }
