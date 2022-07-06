@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogos</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <h1>JOGOS</h1>
+
+    <table>
+        <tr>
+            <th>NOME</th>
+            <th>descricao</th>
+            <th>avaliacoes</th>
+        </tr>
+        <tr th:each="jogo : ${jogos}">
+            <td th:text="${jogo.nome}"></td>
+            <td th:text="${jogo.descricao}"></td>
+            <td th:text="${jogo.avaliacoes}"></td>
+        </tr>
+    </table>
+
+    <th:block th:each="jogo : ${jogos}">
+        <div class="col-md">
+            <div class="card text-center g-4">
+                <div class="card-header"></div>
+                    <div class="card-body">
+                        <h1>deu certo</h1>
+                        <h5 class="card-title" th:text="${jogo.nome}" />
+                        <input type="hidden" name="selectedElementName" th:value="${jogo.id}" />
+                        <p class="card-text" th:text="${jogo.descricao}" />
+                        <button class="btn btn-primary form-control" type="submit">Enter</button>
+                    </div>
+                <div class="card-footer text-muted">Entry Points:</div>
+            </div>
+        </div>
+    </th:block>
+
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

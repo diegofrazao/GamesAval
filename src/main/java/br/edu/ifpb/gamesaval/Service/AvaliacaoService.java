@@ -41,16 +41,12 @@ public class AvaliacaoService {
 
         DeliverCallback callback = (consumerTag, delivery) -> {
             String mensagem = new String(delivery.getBody());
-            System.out.println("Consumer: " + mensagem);
             Avaliacao avaliacao = new Avaliacao();
             avaliacao.setDescricao(mensagem);
             this.repository.save(avaliacao);
         };
 
-        channel.basicConsume(nomeFila, true, callback, consumerTag -> {
-            System.out.println("\n\nConsumer: " + consumerTag);
-            System.out.println("\n\nCallback: " + callback);
-        });
+        channel.basicConsume(nomeFila, true, callback, consumerTag -> {});
     }
 
     public void apagarAvaliacao(Integer id){

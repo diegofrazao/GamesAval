@@ -12,10 +12,4 @@ public class UsuarioController {
     @Autowired
     UsuarioService service;
 
-    @GetMapping("/")
-    public String getUsers(Model model) {
-        model.addAttribute("usuarios", service.getUsuarios());
-        return "Usuarios/all";
-    }
-
 }
