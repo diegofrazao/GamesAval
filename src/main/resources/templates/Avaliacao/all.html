@@ -3,16 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Avaliacoes</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 <body>
+    <header th:replace="~{fragments/header :: header}"></header>
 
     <h1>Avaliações</h1>
 
-    <ul th:each="avaliacao : ${avaliacoes}" >
-        <li th:text="'Avaliação: '+${avaliacao.descricao}"></li>
-    </ul>
-    <div><br>
-        <a th:href="@{/avaliacao/add}">Add</a>
-    </div>
+<!--    <ul th:each="avaliacao : ${avaliacoes}" >-->
+<!--        <li th:text="'Avaliação: '+${avaliacao.descricao}"></li>-->
+<!--    </ul>-->
+<!--    <div><br>-->
+<!--        <a th:href="@{/avaliacao/add}">Add</a>-->
+<!--    </div>-->
+
+    <th:block th:each="avaliacao : ${avaliacoes}">
+        <div class="col-md">
+            <div class="card text-center g-4">
+                <div class="card-header"></div>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${avaliacao.descricao}" />
+                        <p class="card-text" th:text="${avaliacao.descricao}" />
+                        <button class="btn btn-primary form-control" type="submit">Enter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

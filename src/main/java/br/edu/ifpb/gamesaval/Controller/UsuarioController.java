@@ -21,11 +21,10 @@ public class UsuarioController {
     @Autowired
     UsuarioService service;
 
-
     @GetMapping("/usuario/add")
     public String inserirOuAtualizar(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "Usuario/add";
+        return "Usuarios/add";
 
     }
 

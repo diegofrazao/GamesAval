@@ -55,6 +55,6 @@ public class AvaliacaoController {
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();
         }
-        return "redirect:/avaliacao";
+        return "redirect:/";
     }
 }
