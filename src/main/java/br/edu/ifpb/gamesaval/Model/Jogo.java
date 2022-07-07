@@ -1,6 +1,7 @@
 package br.edu.ifpb.gamesaval.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Jogo {
     private String nome;
     private String descricao;
     @OneToMany(mappedBy = "jogo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Avaliacao> avaliacoes;
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
 
     public Jogo() {
     }
@@ -47,9 +48,8 @@ public class Jogo {
         return this.avaliacoes;
     }
 
-    public void setAvaliacoes(Avaliacao avaliacoesJogos) {
-        avaliacoesJogos.setJogo(this);
-        this.avaliacoes.add(avaliacoesJogos);
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacoes.add(avaliacao);
     }
 
     @Override

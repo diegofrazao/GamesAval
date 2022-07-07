@@ -59,7 +59,6 @@ public class Usuario {
     }
 
     public void setAvaliacoes(Avaliacao avaliacao) {
-        avaliacao.setUsuario(this);
         this.avaliacoes.add(avaliacao);
     }
 

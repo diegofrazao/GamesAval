@@ -19,14 +19,9 @@
                     <div class="card-body">
                         <h3 class="card-title" th:text="${jogo.nome}" />
                         <p class="card-text" th:text="${jogo.descricao}" />
-                        <a style="text-decoration: none" th:href="@{/avaliacao/add}">
+                        <a style="text-decoration: none" th:href="@{'/avaliacao/add/' + ${jogo.id}}">
                             <button class="btn btn-primary" type="button">
                                 Adicionar avaliação
-                            </button>
-                        </a>
-                        <a style="text-decoration: none" th:href="@{'/jogo/' + ${jogo.id}}">
-                            <button class="btn btn-primary" type="button">
-                                Visualizar avaliações
                             </button>
                         </a>
                         <a style="text-decoration: none" th:href="@{'/jogo/' + ${jogo.id}}">

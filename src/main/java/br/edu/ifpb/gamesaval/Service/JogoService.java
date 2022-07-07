@@ -2,7 +2,6 @@ package br.edu.ifpb.gamesaval.Service;
 
 import br.edu.ifpb.gamesaval.Model.Avaliacao;
 import br.edu.ifpb.gamesaval.Model.Jogo;
-import br.edu.ifpb.gamesaval.Repository.AvaliacaoRepository;
 import br.edu.ifpb.gamesaval.Repository.JogoRepository;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

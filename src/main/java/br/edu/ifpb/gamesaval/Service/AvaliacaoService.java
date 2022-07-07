@@ -20,7 +20,9 @@ public class AvaliacaoService {
 
     @Autowired
     private AvaliacaoRepository repository;
+    @Autowired
     private JogoService jogoService;
+    @Autowired
     private UsuarioService usuarioService;
 
     public List<Avaliacao> getAvaliacoes(){
@@ -31,7 +33,14 @@ public class AvaliacaoService {
         return this.repository.findById(id).orElse(null);
     }
 
-    public void inserirAvaliacao() throws IOException, TimeoutException {
+    public Avaliacao adicionarAvaliacao(Integer id) {
+        Jogo jogo = this.jogoService.getJogoById(id);
+        Avaliacao avaliacao = new Avaliacao("", jogo);
+        this.repository.save(avaliacao);
+        return avaliacao;
+    }
+
+    public void inserirAvaliacao() throws Exception {
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
@@ -45,11 +54,19 @@ public class AvaliacaoService {
 
         DeliverCallback callback = (consumerTag, delivery) -> {
             String[] dados = new String(delivery.getBody()).split(";");
-            String descricao = dados[0];
+            String avaliacaoId = dados[0];
+            String jogoId = dados[1];
+            String usuarioId = dados[2];
+            String descricao = dados[3];
 
-            System.out.println("Consumer: " + descricao);
-            Avaliacao avaliacao = new Avaliacao();
+            Avaliacao avaliacao = this.getAvaliacaoById(Integer.parseInt(avaliacaoId));
+            Jogo jogo = this.jogoService.getJogoById(Integer.parseInt(jogoId));
+            Usuario usuario = this.usuarioService.getUsuarioById(Integer.parseInt(usuarioId));
+
             avaliacao.setDescricao(descricao);
+            avaliacao.setJogo(jogo);
+            avaliacao.setUsuario(usuario);
+            System.out.println("==> Consumer: " + dados);
             this.repository.save(avaliacao);
         };
 
