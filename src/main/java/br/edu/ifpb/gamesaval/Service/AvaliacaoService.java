@@ -35,9 +35,9 @@ public class AvaliacaoService {
         Connection con = factory.newConnection();
         Channel channel = con.createChannel();
 
-        String nomeFila = "descricaoAvaliacao";
+        String dadosFila = "dadosAvaliacao";
 
-        channel.queueDeclare(nomeFila, false, false, false, null);
+        channel.queueDeclare(dadosFila, false, false, false, null);
 
         DeliverCallback callback = (consumerTag, delivery) -> {
             String mensagem = new String(delivery.getBody());
@@ -46,7 +46,7 @@ public class AvaliacaoService {
             this.repository.save(avaliacao);
         };
 
-        channel.basicConsume(nomeFila, true, callback, consumerTag -> {});
+        channel.basicConsume(dadosFila, true, callback, consumerTag -> {});
     }
 
     public void apagarAvaliacao(Integer id){

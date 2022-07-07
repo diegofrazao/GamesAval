@@ -39,17 +39,17 @@ public class AvaliacaoController {
         factory.setHost("localhost");
         factory.setPort(5672);
 
-        String nomeFila = "descricaoAvaliacao";
+        String dadosFila = "dadosAvaliacao";
 
         try(
             Connection con = factory.newConnection();
             Channel channel = con.createChannel()) {
-            channel.queueDeclare(nomeFila, false, false, false, null);
+            channel.queueDeclare(dadosFila, false, false, false, null);
 
-            String mensagem = avaliacao.getDescricao();
+            String dados = avaliacao.getJogos() + " " + avaliacao.getDescricao();
 
-            channel.basicPublish("", nomeFila, null, mensagem.getBytes());
-            System.out.println("Producer: " + mensagem);
+            channel.basicPublish("", dadosFila, null, dados.getBytes());
+            System.out.println("Producer: " + dados);
 
             this.service.inserirAvaliacao();
         } catch (IOException | TimeoutException e) {

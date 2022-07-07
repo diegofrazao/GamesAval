@@ -4,11 +4,18 @@ import br.edu.ifpb.gamesaval.Model.Avaliacao;
 import br.edu.ifpb.gamesaval.Model.Jogo;
 import br.edu.ifpb.gamesaval.Service.AvaliacaoService;
 import br.edu.ifpb.gamesaval.Service.JogoService;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 @Controller
 public class JogoController {
@@ -31,8 +38,27 @@ public class JogoController {
     }
 
     @PostMapping("jogo/add")
-    public String inserirJogo(){
+    public String inserirJogo(@ModelAttribute Jogo jogo){
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        factory.setPort(5672);
 
+        String dadosFila = "dadosJogo";
+
+        try(
+            Connection con = factory.newConnection();
+            Channel channel = con.createChannel()) {
+            channel.queueDeclare(dadosFila, false, false, false, null);
+
+            String dados = jogo.getNome() + " " + jogo.getDescricao();
+
+            channel.basicPublish("", dadosFila, null, dados.getBytes());
+            System.out.println("Producer: " + dados);
+
+            this.jogoService.inserirJogo();
+        } catch (IOException | TimeoutException e) {
+            e.printStackTrace();
+        }
         return "redirect:/";
     }
 }

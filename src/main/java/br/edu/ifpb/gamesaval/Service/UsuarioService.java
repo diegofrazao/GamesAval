@@ -34,22 +34,25 @@ public class UsuarioService {
         Connection con = factory.newConnection();
         Channel channel = con.createChannel();
 
-        String nomeFila = "nomeUsuario";
+        String dadosFila = "dadosUsuario";
 
-        channel.queueDeclare(nomeFila, false, false, false, null);
+        channel.queueDeclare(dadosFila, false, false, false, null);
 
         DeliverCallback callback = (consumerTag, delivery) -> {
-            String nome = new String(delivery.getBody());
-            String login = new String(delivery.getBody());
-            String senha = new String(delivery.getBody());
+            String[] dados = new String(delivery.getBody()).split(" ");
+            String nome = dados[0];
+            String login = dados[1];
+            String senha = dados[2];
+
             Usuario usuario = new Usuario();
             usuario.setNome(nome);
             usuario.setLogin(login);
             usuario.setSenha(senha);
+
             this.repository.save(usuario);
         };
 
-        channel.basicConsume(nomeFila, true, callback, consumerTag -> {});
+        channel.basicConsume(dadosFila, true, callback, consumerTag -> {});
     }
 
     public void apagarUsuario(Integer id) {

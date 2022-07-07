@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <title>Cadastro usuario</title>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
 <body>
     <header th:replace="~{fragments/header :: header}"></header>
 
     <h1 class="text-center">Adicionar usuario</h1>
 
-    <div class="d-flex justify-content-center text-center">
-        <form class="row" action="#" th:action="@{/usuario/add}" th:object="${usuario}" method="post">
+    <div class="d-flex justify-content-center text-centerr">
+        <form class="row" th:action="@{/usuario/add}" th:object="${usuario}" method="post">
             <div class="col">
                 <label class="form-label">Nome do usuario:</label>
                 <input type="text" th:field="*{nome}" class="form-control">
+            </div>
+            <div class="col">
                 <label class="form-label">Login do usuario:</label>
                 <input type="text" th:field="*{login}" class="form-control">
+            </div>
+            <div class="col">
                 <label class="form-label">Senha do usuario:</label>
                 <input type="text" th:field="*{senha}" class="form-control">
             </div>
-            <div><br>
+            <div class="text-center"><br>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
                 <button type="reset" class="btn btn-secondary">Limpar</button>
                 <button type="submit" class="btn btn-danger">Cancelar</button>

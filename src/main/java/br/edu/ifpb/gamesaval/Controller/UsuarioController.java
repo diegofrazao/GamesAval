@@ -37,16 +37,16 @@ public class UsuarioController {
         String nomeFila = "nomeUsuario";
 
         try(
-                Connection con = factory.newConnection();
-                Channel channel = con.createChannel()) {
-                channel.queueDeclare(nomeFila, false, false, false, null);
+            Connection con = factory.newConnection();
+            Channel channel = con.createChannel()) {
+            channel.queueDeclare(nomeFila, false, false, false, null);
 
-                String nome = usuario.getNome();
+            String dados = usuario.getNome() + " " + usuario.getLogin() + " " + usuario.getSenha();
 
-                channel.basicPublish("", nomeFila, null, nome.getBytes());
-                System.out.println("Producer: " + nome);
+            channel.basicPublish("", nomeFila, null, dados.getBytes());
+            System.out.println("Producer: " + dados);
 
-                this.service.inserirOuAtualizar();
+            this.service.inserirOuAtualizar();
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();
         }
