@@ -12,7 +12,7 @@
     <h1 class="text-center">Adicionar usuario</h1>
 
     <div class="d-flex justify-content-center text-centerr">
-        <form class="row" th:action="@{/usuario/add}" th:object="${usuario}" method="post">
+        <form class="row text-center" th:action="@{/usuario/add}" th:object="${usuario}" method="post">
             <div class="col">
                 <label class="form-label">Nome do usuario:</label>
                 <input type="text" th:field="*{nome}" class="form-control">
