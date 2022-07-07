@@ -16,6 +16,10 @@
             <div class="col">
                 <label class="form-label">Nome do usuario:</label>
                 <input type="text" th:field="*{nome}" class="form-control">
+                <label class="form-label">Login do usuario:</label>
+                <input type="text" th:field="*{login}" class="form-control">
+                <label class="form-label">Senha do usuario:</label>
+                <input type="text" th:field="*{senha}" class="form-control">
             </div>
             <div><br>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -26,5 +30,6 @@
     </div>
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>
+</div>
 </body>
 </html>

@@ -40,8 +40,12 @@ public class UsuarioService {
 
         DeliverCallback callback = (consumerTag, delivery) -> {
             String nome = new String(delivery.getBody());
+            String login = new String(delivery.getBody());
+            String senha = new String(delivery.getBody());
             Usuario usuario = new Usuario();
             usuario.setNome(nome);
+            usuario.setLogin(login);
+            usuario.setSenha(senha);
             this.repository.save(usuario);
         };
 
