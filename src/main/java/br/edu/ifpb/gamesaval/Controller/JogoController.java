@@ -12,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 @Controller
@@ -37,6 +40,14 @@ public class JogoController {
         return "Jogo/add";
     }
 
+    @GetMapping("/jogo/{id}")
+    public ModelAndView getAvaliacoes (@PathVariable("id") Integer id) {
+        ModelAndView listView = new ModelAndView("Jogo/avaliacoes");
+        List<Avaliacao> avaliacaes = this.jogoService.getAvaliacoesPorJogo(id);
+        listView.addObject("avaliacoes", avaliacaes);
+        return listView;
+    }
+
     @PostMapping("jogo/add")
     public String inserirJogo(@ModelAttribute Jogo jogo){
         ConnectionFactory factory = new ConnectionFactory();
@@ -50,7 +61,7 @@ public class JogoController {
             Channel channel = con.createChannel()) {
             channel.queueDeclare(dadosFila, false, false, false, null);
 
-            String dados = jogo.getNome() + " " + jogo.getDescricao();
+            String dados = jogo.getNome() + ";" + jogo.getDescricao();
 
             channel.basicPublish("", dadosFila, null, dados.getBytes());
             System.out.println("Producer: " + dados);

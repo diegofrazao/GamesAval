@@ -41,7 +41,7 @@ public class UsuarioController {
             Channel channel = con.createChannel()) {
             channel.queueDeclare(nomeFila, false, false, false, null);
 
-            String dados = usuario.getNome() + " " + usuario.getLogin() + " " + usuario.getSenha();
+            String dados = usuario.getNome() + ";" + usuario.getLogin() + ";" + usuario.getSenha();
 
             channel.basicPublish("", nomeFila, null, dados.getBytes());
             System.out.println("Producer: " + dados);

@@ -10,7 +10,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String nome;
     private String login;
     private String senha;
@@ -26,7 +26,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -70,7 +70,6 @@ public class Usuario {
                 ", nome='" + nome + '\'' +
                 ", login='" + login + '\'' +
                 ", senha='" + senha + '\'' +
-                ", avaliacoes=" + avaliacoes +
                 '}';
     }
 }

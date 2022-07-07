@@ -1,6 +1,8 @@
 package br.edu.ifpb.gamesaval.Service;
 
+import br.edu.ifpb.gamesaval.Model.Avaliacao;
 import br.edu.ifpb.gamesaval.Model.Jogo;
+import br.edu.ifpb.gamesaval.Repository.AvaliacaoRepository;
 import br.edu.ifpb.gamesaval.Repository.JogoRepository;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -17,14 +19,24 @@ import java.util.concurrent.TimeoutException;
 public class JogoService {
 
     @Autowired
-    private JogoRepository repository;
+    private JogoRepository jogoRepository;
 
     public List<Jogo> getJogos(){
-        return this.repository.findAll();
+        return this.jogoRepository.findAll();
     }
 
     public Jogo getJogoById(Integer id) {
-        return this.repository.findById(id).orElse(null);
+        return this.jogoRepository.findById(id).orElse(null);
+    }
+
+    public List<Avaliacao> getAvaliacoesPorJogo(Integer jogoId) {
+        Jogo jogo = this.getJogoById(jogoId);
+
+        if (jogo != null) {
+            return jogo.getAvaliacoes();
+        }
+
+        return null;
     }
 
     public void inserirJogo() throws IOException, TimeoutException {
@@ -39,18 +51,18 @@ public class JogoService {
         channel.queueDeclare(dadosFila, false, false, false, null);
 
         DeliverCallback callback = (consumerTag, delivery) -> {
-            String[] dados = new String(delivery.getBody()).split(" ");
+            String[] dados = new String(delivery.getBody()).split(";");
             String nome = dados[0];
             String descricao = dados[1];
             Jogo jogo = new Jogo(nome, descricao);
-            this.repository.save(jogo);
+            this.jogoRepository.save(jogo);
         };
 
         channel.basicConsume(dadosFila, true, callback, consumerTag -> {});
     }
 
     public void apagarJogo(Integer id){
-        this.repository.deleteById(id);
+        this.jogoRepository.deleteById(id);
     }
 
 }

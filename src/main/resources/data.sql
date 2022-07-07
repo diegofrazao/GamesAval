@@ -6,3 +6,12 @@ values ('Counter-Strike', 'Um jogo de FPS.');
 
 insert into tb_jogos (nome, descricao)
 values ('DayZ', 'Um jogo de Sobrevivencia.');
+
+insert into tb_avaliacoes (descricao, jogo_id, usuario_id)
+values ('teste 1', 1, 1);
+
+insert into tb_avaliacoes (descricao, jogo_id, usuario_id)
+values ('teste 2', 1, 1);
+
+insert into tb_avaliacoes (descricao, jogo_id, usuario_id)
+values ('teste 3', 1, 1);

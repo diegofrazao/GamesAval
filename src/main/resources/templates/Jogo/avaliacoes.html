@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaliações do jogo</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body>
+
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <h2 class="text-center">Listagem das Avaliações</h2>
+
+    <th:block th:each="avaliacao : ${avaliacoes}">
+        <div class="col-md">
+            <div class="card text-center g-4">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${avaliacao.jogo.nome}" />
+                    <h5 class="card-text" th:text="${avaliacao.descricao}" />
+                    <p class="card-text" th:text="'@' + ${avaliacao.usuario.nome}" />
+                    <a th:href="@{'/avaliacao/del/' + ${avaliacao.id}}">
+                        <button class="btn btn-danger" type="button">
+                            Remover
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </th:block>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

@@ -39,7 +39,7 @@ public class UsuarioService {
         channel.queueDeclare(dadosFila, false, false, false, null);
 
         DeliverCallback callback = (consumerTag, delivery) -> {
-            String[] dados = new String(delivery.getBody()).split(" ");
+            String[] dados = new String(delivery.getBody()).split(";");
             String nome = dados[0];
             String login = dados[1];
             String senha = dados[2];

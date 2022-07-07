@@ -9,12 +9,12 @@ public class Avaliacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String descricao;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
-    @ManyToMany
-    private List<Jogo> jogos;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Jogo jogo;
 
     public Avaliacao() {
     }
@@ -24,7 +24,7 @@ public class Avaliacao {
         this.usuario = usuario;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -45,13 +45,13 @@ public class Avaliacao {
         this.usuario = usuario;
     }
 
-    public List<Jogo> getJogos() {
-        return jogos;
+    public Jogo getJogo() {
+        return jogo;
     }
 
-    public void setJogos(Jogo avaliacoesJogos) {
-        avaliacoesJogos.setAvaliacoes(this);
-        this.jogos.add(avaliacoesJogos);
+    public void setJogo(Jogo avaliacaoJogo) {
+        avaliacaoJogo.setAvaliacoes(this);
+        this.jogo = avaliacaoJogo;
     }
 
     @Override
@@ -59,8 +59,8 @@ public class Avaliacao {
         return "Avaliacao{" +
                 "id=" + id +
                 ", descricao='" + descricao + '\'' +
-                ", usuario=" + usuario +
-                ", jogos=" + jogos +
+                ", usuario=" + usuario.getNome() +
+                ", jogo=" + jogo.getNome() +
                 '}';
     }
 }

@@ -1,6 +1,8 @@
 package br.edu.ifpb.gamesaval.Service;
 
 import br.edu.ifpb.gamesaval.Model.Avaliacao;
+import br.edu.ifpb.gamesaval.Model.Jogo;
+import br.edu.ifpb.gamesaval.Model.Usuario;
 import br.edu.ifpb.gamesaval.Repository.AvaliacaoRepository;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -18,6 +20,8 @@ public class AvaliacaoService {
 
     @Autowired
     private AvaliacaoRepository repository;
+    private JogoService jogoService;
+    private UsuarioService usuarioService;
 
     public List<Avaliacao> getAvaliacoes(){
         return this.repository.findAll();
@@ -40,9 +44,12 @@ public class AvaliacaoService {
         channel.queueDeclare(dadosFila, false, false, false, null);
 
         DeliverCallback callback = (consumerTag, delivery) -> {
-            String mensagem = new String(delivery.getBody());
+            String[] dados = new String(delivery.getBody()).split(";");
+            String descricao = dados[0];
+
+            System.out.println("Consumer: " + descricao);
             Avaliacao avaliacao = new Avaliacao();
-            avaliacao.setDescricao(mensagem);
+            avaliacao.setDescricao(descricao);
             this.repository.save(avaliacao);
         };
 

@@ -9,10 +9,10 @@ public class Jogo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String nome;
     private String descricao;
-    @ManyToMany(mappedBy = "jogos")
+    @OneToMany(mappedBy = "jogo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Avaliacao> avaliacoes;
 
     public Jogo() {
@@ -23,7 +23,7 @@ public class Jogo {
         this.descricao = descricao;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -44,11 +44,11 @@ public class Jogo {
     }
 
     public List<Avaliacao> getAvaliacoes() {
-        return avaliacoes;
+        return this.avaliacoes;
     }
 
     public void setAvaliacoes(Avaliacao avaliacoesJogos) {
-        avaliacoesJogos.setJogos(this);
+        avaliacoesJogos.setJogo(this);
         this.avaliacoes.add(avaliacoesJogos);
     }
 
@@ -58,7 +58,6 @@ public class Jogo {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", avaliacoes=" + avaliacoes +
                 '}';
     }
 }
