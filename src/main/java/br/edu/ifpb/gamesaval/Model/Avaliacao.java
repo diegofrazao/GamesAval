@@ -1,7 +1,6 @@
 package br.edu.ifpb.gamesaval.Model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "tb_avaliacoes")

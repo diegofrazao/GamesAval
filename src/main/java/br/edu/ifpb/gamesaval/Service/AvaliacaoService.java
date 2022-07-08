@@ -11,10 +11,6 @@ import com.rabbitmq.client.DeliverCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.TimeoutException;
-
 @Service
 public class AvaliacaoService {
 
@@ -24,10 +20,6 @@ public class AvaliacaoService {
     private JogoService jogoService;
     @Autowired
     private UsuarioService usuarioService;
-
-    public List<Avaliacao> getAvaliacoes(){
-        return this.repository.findAll();
-    }
 
     public Avaliacao getAvaliacaoById(Integer id){
         return this.repository.findById(id).orElse(null);
@@ -66,7 +58,6 @@ public class AvaliacaoService {
             avaliacao.setDescricao(descricao);
             avaliacao.setJogo(jogo);
             avaliacao.setUsuario(usuario);
-            System.out.println("==> Consumer: " + dados);
             this.repository.save(avaliacao);
         };
 

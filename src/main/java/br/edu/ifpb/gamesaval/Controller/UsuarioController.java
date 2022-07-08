@@ -44,7 +44,6 @@ public class UsuarioController {
             String dados = usuario.getNome() + ";" + usuario.getLogin() + ";" + usuario.getSenha();
 
             channel.basicPublish("", nomeFila, null, dados.getBytes());
-            System.out.println("Producer: " + dados);
 
             this.service.inserirOuAtualizar();
         } catch (IOException | TimeoutException e) {

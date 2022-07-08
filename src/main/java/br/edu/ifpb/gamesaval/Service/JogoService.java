@@ -60,8 +60,4 @@ public class JogoService {
         channel.basicConsume(dadosFila, true, callback, consumerTag -> {});
     }
 
-    public void apagarJogo(Integer id){
-        this.jogoRepository.deleteById(id);
-    }
-
 }

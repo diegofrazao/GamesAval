@@ -2,7 +2,6 @@ package br.edu.ifpb.gamesaval.Controller;
 
 import br.edu.ifpb.gamesaval.Model.Avaliacao;
 import br.edu.ifpb.gamesaval.Model.Jogo;
-import br.edu.ifpb.gamesaval.Service.AvaliacaoService;
 import br.edu.ifpb.gamesaval.Service.JogoService;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -25,7 +24,6 @@ public class JogoController {
 
     @Autowired
     JogoService jogoService;
-    AvaliacaoService avaliacaoService;
 
     @GetMapping("/")
     public String getJogos(Model model) {
