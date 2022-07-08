@@ -9,7 +9,7 @@
 <body>
     <header th:replace="~{fragments/header :: header}"></header>
 
-    <h1 class="text-center">Adicionar usuario</h1>
+    <h2 class="text-center">Cadastrar usuário</h2>
 
     <div class="d-flex justify-content-center text-centerr">
         <form class="row text-center" th:action="@{/usuario/add}" th:object="${usuario}" method="post">

@@ -9,14 +9,10 @@
 <body>
     <header th:replace="~{fragments/header :: header}"></header>
 
-    <h1 class="text-center">Adicionar avaliação</h1>
-
     <div class="d-flex justify-content-center text-center">
         <form class="row" th:action="@{'/avaliacao/add/' + *{id}}" th:object="${avaliacao}" method="post">
-            <div class="col">
-                <label class="form-label">Nome do jogo:</label>
-                <input type="text" readonly="readonly" th:field="*{jogo.nome}" class="text-center form-control">
-            </div>
+            <h2 class="text-center" th:text="'Adicionar avaliação ao jogo ' + *{jogo.nome}"></h2>
+            <input type="hidden" th:field="*{jogo.nome}"/>
             <div class="col">
                 <label class="form-label">Descrição da avaliacao</label>
                 <input type="text" th:field="*{descricao}" class="form-control">
