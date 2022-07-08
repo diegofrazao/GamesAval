@@ -53,7 +53,9 @@ public class JogoService {
             String[] dados = new String(delivery.getBody()).split(";");
             String nome = dados[0];
             String descricao = dados[1];
+
             Jogo jogo = new Jogo(nome, descricao);
+
             this.jogoRepository.save(jogo);
         };
 

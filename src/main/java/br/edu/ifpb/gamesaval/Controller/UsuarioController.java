@@ -34,16 +34,16 @@ public class UsuarioController {
         factory.setHost("localhost");
         factory.setPort(5672);
 
-        String nomeFila = "nomeUsuario";
+        String dadosFila = "dadosUsuario";
 
         try(
             Connection con = factory.newConnection();
             Channel channel = con.createChannel()) {
-            channel.queueDeclare(nomeFila, false, false, false, null);
+            channel.queueDeclare(dadosFila, false, false, false, null);
 
             String dados = usuario.getNome() + ";" + usuario.getLogin() + ";" + usuario.getSenha();
 
-            channel.basicPublish("", nomeFila, null, dados.getBytes());
+            channel.basicPublish("", dadosFila, null, dados.getBytes());
 
             this.service.inserirOuAtualizar();
         } catch (IOException | TimeoutException e) {

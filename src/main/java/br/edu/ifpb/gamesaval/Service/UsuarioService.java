@@ -44,11 +44,9 @@ public class UsuarioService {
             String login = dados[1];
             String senha = dados[2];
 
-            Usuario usuario = new Usuario();
-            usuario.setNome(nome);
-            usuario.setLogin(login);
-            usuario.setSenha(senha);
+            Usuario usuario = new Usuario(nome, login, senha);
 
+            System.out.println("Service user=> " + usuario);
             this.repository.save(usuario);
         };
 
